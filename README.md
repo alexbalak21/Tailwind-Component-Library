@@ -1,73 +1,207 @@
-# React + TypeScript + Vite
+# Tailwind Theme System & Component Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application built with Tailwind CSS v4, featuring a dynamic theme system with 22 color options and dark/light mode support, plus a complete UI component library.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✨ **Theme System**
+- 22 color themes (red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, slate, gray, zinc, neutral, stone)
+- Dark/Light/System mode toggle with localStorage persistence
+- CSS variable-based theming for runtime color switching
+- Floating theme panel for easy customization
 
-## React Compiler
+📦 **Component Library**
+- **Button** - Multiple variants (primary, secondary, outline, danger) and sizes
+- **Input** - Text input with labels, error states, and help text
+- **Card** - Container component with header, title, content, and footer
+- **Badge** - 5 color variants for status indicators
+- **Select** - Dropdown menu with label support
+- **Textarea** - Multi-line text input with validation
+- **Alert** - 4 variants (info, success, warning, error) with close handling
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🎨 **UI Components Demo**
+- Interactive showcase of all components
+- Form example with full validation states
+- Dark mode support across all components
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
+- Node.js 18+ and npm
+- Modern web browser
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be available at `http://localhost:5173/`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── App.tsx              # Main app component with demo
+├── ThemePanel.tsx       # Theme switcher with color grid & dark/light toggle
+├── index.css            # Global styles & theme CSS variables
+├── main.tsx             # React entry point
+├── components/          # Reusable UI components
+│   ├── Alert.tsx
+│   ├── Badge.tsx
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── Input.tsx
+│   ├── Select.tsx
+│   ├── Textarea.tsx
+│   └── index.ts        # Component exports
+└── hooks/              # Custom React hooks
+    └── useTheme.ts     # Dark/light/system mode management
+```
+
+## Usage
+
+### Theme System
+
+#### Using the Theme Panel
+Click the floating button in the bottom-right corner to open the theme panel:
+- Select a color from the 22-color grid to change the primary color
+- Toggle the switch to switch between light and dark modes
+- Choose from Light, Dark, or System (syncs with OS preference)
+
+#### Programmatically
+
+```typescript
+import { useTheme } from './hooks/useTheme'
+
+function MyComponent() {
+  const { theme, setTheme } = useTheme()
+
+  return (
+    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+      Toggle to {theme === 'dark' ? 'light' : 'dark'} mode
+    </button>
+  )
+}
+```
+
+### Using Components
+
+```tsx
+import { Button, Input, Card, CardHeader, CardTitle, CardContent, Badge, Alert } from './components'
+
+export default function Example() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Input label="Your name" placeholder="John" />
+        <Button>Submit</Button>
+        <Badge>New</Badge>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+### Primary Color in Styles
+
+The primary color is available via CSS variables:
+
+```tsx
+<div className="bg-primary-500 text-white">
+  Uses the selected primary color
+</div>
+```
+
+Or directly in CSS/Tailwind:
+```css
+.custom-element {
+  background-color: var(--color-primary-500);
+}
+```
+
+## Theme System Architecture
+
+### CSS Variables
+The theme system uses Tailwind CSS v4's `@theme` block in `index.css`:
+- 22 color sets defined via `[data-theme="colorname"]` selectors
+- Each color has shades 50-950
+- Primary color variants (100-900) for component styling
+
+### Dark Mode
+- Toggle via `useTheme()` hook which sets `data-theme` attribute
+- Uses Tailwind's `dark:` variants for component styling
+- Supports three modes: light, dark, system (matches OS preference)
+- Persisted in localStorage
+
+### Color Selection
+- Applied via `data-theme` attribute on document root
+- Runtime switching with CSS variable updates
+- Persisted in localStorage
+
+## Technologies Used
+
+- **React** 19.2.0 - UI framework
+- **Tailwind CSS** 4.1.18 - Utility-first CSS with variable theming
+- **TypeScript** 5.9.3 - Type-safe JavaScript
+- **Vite** 7.3.1 - Fast build tool and dev server
+
+## Browser Support
+
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Any modern browser supporting CSS variables and ES2020
+
+## Development
+
+### Scripts
+
+```bash
+npm run dev      # Start development server
+npm run build    # Create production bundle
+npm run preview  # Preview production build locally
+npm run lint     # Run ESLint
+```
+
+### Customizing Themes
+
+To add new colors or modify existing ones, edit `src/index.css` in the `@theme` block:
+
+```css
+@theme {
+  --color-mycolor-50: #fff...;
+  --color-mycolor-500: #...;
+  --color-mycolor-900: #...;
+}
+```
+
+Then add a selector in the same file:
+```css
+[data-theme="mycolor"] {
+  --color-primary-50: var(--color-mycolor-50);
+  /* ... other shades ... */
+}
+```
+
+## License
+
+MIT - Feel free to use this project for personal or commercial use.
+
+## Contributing
+
+Pull requests welcome! For major changes, please open an issue first to discuss what you'd like to change.
 ```
