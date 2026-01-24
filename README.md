@@ -52,11 +52,11 @@ The app will be available at `http://localhost:5173/`
 
 ```
 src/
-├── App.tsx              # Main app component with demo
-├── ThemePanel.tsx       # Theme switcher with color grid & dark/light toggle
-├── index.css            # Global styles & theme CSS variables
-├── main.tsx             # React entry point
-├── components/          # Reusable UI components
+├── App.tsx                    # Main app component with demo
+├── index.css                  # Global styles & theme CSS variables
+├── main.tsx                   # React entry point
+├── components/
+│   ├── ThemePanel.tsx         # Floating theme switcher panel
 │   ├── Alert.tsx
 │   ├── Badge.tsx
 │   ├── Button.tsx
@@ -64,9 +64,9 @@ src/
 │   ├── Input.tsx
 │   ├── Select.tsx
 │   ├── Textarea.tsx
-│   └── index.ts        # Component exports
-└── hooks/              # Custom React hooks
-    └── useTheme.ts     # Dark/light/system mode management
+│   └── index.ts               # Component exports
+└── hooks/                     
+    └── useTheme.ts            # Dark/light/system mode management
 ```
 
 ## Usage
@@ -135,22 +135,48 @@ Or directly in CSS/Tailwind:
 
 ## Theme System Architecture
 
-### CSS Variables
-The theme system uses Tailwind CSS v4's `@theme` block in `index.css`:
-- 22 color sets defined via `[data-theme="colorname"]` selectors
-- Each color has shades 50-950
-- Primary color variants (100-900) for component styling
+### How It Works
+The theme system operates on two independent tracks:
 
-### Dark Mode
-- Toggle via `useTheme()` hook which sets `data-theme` attribute
-- Uses Tailwind's `dark:` variants for component styling
-- Supports three modes: light, dark, system (matches OS preference)
-- Persisted in localStorage
+**1. Dark/Light Mode (`themeMode` in localStorage)**
+- Managed by `useTheme()` hook
+- Applies `dark` class to root HTML element
+- Supports three modes: `light`, `dark`, `system`
+- System mode syncs with OS preference via `prefers-color-scheme` media query
+- Persisted in localStorage with key: `themeMode`
 
-### Color Selection
-- Applied via `data-theme` attribute on document root
-- Runtime switching with CSS variable updates
-- Persisted in localStorage
+**2. Color Theme (`themeColor` in localStorage)**
+- Managed by ThemePanel component
+- Applies `data-theme="colorname"` attribute to root HTML element
+- 22 color presets available
+- Uses CSS variables for dynamic color switching
+- Persisted in localStorage with key: `themeColor`
+
+### Preventing Flash on Reload
+An inline script in `index.html` runs **before React renders**, applying saved theme settings synchronously:
+```html
+<script>
+  const themeMode = localStorage.getItem('themeMode');
+  const themeColor = localStorage.getItem('themeColor') || 'indigo';
+  
+  if (themeMode === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+  document.documentElement.dataset.theme = themeColor;
+</script>
+```
+This ensures the correct theme is visible immediately, with no light→dark flash.
+
+### CSS Implementation
+The `index.css` file defines:
+- `@theme` block with 22 color palettes mapping to CSS variables
+- Custom dark variant: `@custom-variant dark (&:where(.dark, .dark *))`
+- Each color theme mapped via `[data-theme="colorname"]` selectors
+- All components use `dark:` variants which activate when `.dark` class is present
+
+### Storage Keys
+- `themeMode` - Stores: `"light"`, `"dark"`, or `"system"`
+- `themeColor` - Stores: Color name like `"indigo"`, `"red"`, `"cyan"`, etc.
 
 ## Technologies Used
 
@@ -177,29 +203,97 @@ npm run preview  # Preview production build locally
 npm run lint     # Run ESLint
 ```
 
-### Customizing Themes
+### How to Use the Theme Hook
 
-To add new colors or modify existing ones, edit `src/index.css` in the `@theme` block:
+```typescript
+import { useTheme } from './hooks/useTheme'
+import type { Theme } from './hooks/useTheme'
 
-```css
-@theme {
-  --color-mycolor-50: #fff...;
-  --color-mycolor-500: #...;
-  --color-mycolor-900: #...;
+export function MyComponent() {
+  const { theme, setTheme } = useTheme()
+  // theme is "light" | "dark" | "system"
+  
+  const handleToggle = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+    // Automatically saves to localStorage and applies dark class
+  }
+  
+  return (
+    <div>
+      <p>Current mode: {theme}</p>
+      <button onClick={handleToggle}>Toggle Dark Mode</button>
+    </div>
+  )
 }
 ```
 
-Then add a selector in the same file:
+### Customizing Colors
+
+To add or modify color themes, edit `src/index.css`:
+
+1. Add color variables in the `@theme` block (if adding new colors):
 ```css
-[data-theme="mycolor"] {
-  --color-primary-50: var(--color-mycolor-50);
+@theme {
+  --color-mycustom-50: #f0f0f0;
+  --color-mycustom-500: #5555ff;
+  --color-mycustom-900: #001a4d;
   /* ... other shades ... */
 }
+```
+
+2. Add a color preset selector:
+```css
+[data-theme="mycustom"] {
+  --color-primary-50: var(--color-mycustom-50);
+  --color-primary-100: var(--color-mycustom-100);
+  /* ... map all shades ... */
+  --color-primary-900: var(--color-mycustom-900);
+}
+```
+
+3. Add to THEMES array in `ThemePanel.tsx`:
+```typescript
+const THEMES = [
+  // ... existing colors ...
+  'mycustom',
+]
 ```
 
 ## License
 
 MIT - Feel free to use this project for personal or commercial use.
+
+## Debugging
+
+The theme system includes detailed console logging to help track state changes. Open your browser's developer console (F12) to see:
+
+**When initializing:**
+```
+🌙 useTheme initialized:
+  - Saved in localStorage (themeMode): dark
+  - Using mode: dark
+🌙 applyTheme: Applying dark mode
+```
+
+**When toggling dark mode:**
+```
+🌙 Dark mode toggle clicked:
+  - Current theme mode: dark
+  - New theme mode: light
+🌙 changeTheme called:
+  - New mode: light
+  - Saved to localStorage: themeMode = light
+🌙 applyTheme: Applying light mode
+```
+
+**When changing color:**
+```
+🎨 Color theme changed:
+  - New color: red
+  - Dark mode state: dark
+```
+
+Remove these console.log calls if they're not needed in production.
 
 ## Contributing
 
