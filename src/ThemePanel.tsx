@@ -32,7 +32,6 @@ export default function ThemePanel() {
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    // Load theme from localStorage
     const saved = localStorage.getItem('theme') || 'indigo'
     setCurrentTheme(saved)
     document.documentElement.dataset.theme = saved
