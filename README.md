@@ -10,19 +10,30 @@ A modern React application built with Tailwind CSS v4, featuring a dynamic theme
 - CSS variable-based theming for runtime color switching
 - Floating theme panel for easy customization
 
-📦 **Component Library**
-- **Button** - Multiple variants (primary, secondary, outline, danger) and sizes
-- **Input** - Text input with labels, error states, and help text
-- **Card** - Container component with header, title, content, and footer
-- **Badge** - 5 color variants for status indicators
-- **Select** - Dropdown menu with label support
-- **Textarea** - Multi-line text input with validation
-- **Alert** - 4 variants (info, success, warning, error) with close handling
+📦 **Component Library (32 Total)**
 
-🎨 **UI Components Demo**
-- Interactive showcase of all components
-- Form example with full validation states
-- Dark mode support across all components
+**Base Components (8)**
+- Button, Input, Card, Badge, Select, Textarea, Alert, ThemePanel
+
+**Form Components (5)**
+- Checkbox, Radio, Toggle, Slider, FormGroup
+
+**Feedback Components (5)**
+- Toast, Tooltip, ProgressBar, Spinner, Skeleton
+
+**Navigation Components (5)**
+- Tabs, Breadcrumb, Pagination, Navbar, Sidebar
+
+**Layout Components (5)**
+- Modal, Drawer, Divider, Avatar, Stack (HStack/VStack)
+
+**Data Components (3)**
+- Table, List, Dropdown
+
+🎨 **Interactive Demo**
+- Full-page showcase of all components with live examples
+- Responsive design with working state management
+- Complete dark mode support
 
 ## Getting Started
 
@@ -52,21 +63,35 @@ The app will be available at `http://localhost:5173/`
 
 ```
 src/
-├── App.tsx                    # Main app component with demo
-├── index.css                  # Global styles & theme CSS variables
-├── main.tsx                   # React entry point
+├── App.tsx                      # Main app with comprehensive demo
+├── index.css                    # Global styles & theme CSS variables
+├── main.tsx                     # React entry point
 ├── components/
-│   ├── ThemePanel.tsx         # Floating theme switcher panel
-│   ├── Alert.tsx
-│   ├── Badge.tsx
-│   ├── Button.tsx
-│   ├── Card.tsx
-│   ├── Input.tsx
-│   ├── Select.tsx
-│   ├── Textarea.tsx
-│   └── index.ts               # Component exports
-└── hooks/                     
-    └── useTheme.ts            # Dark/light/system mode management
+│   ├── ThemePanel.tsx           # Floating theme switcher
+│   ├── Alert.tsx, Badge.tsx, Button.tsx, Card.tsx
+│   ├── Input.tsx, Select.tsx, Textarea.tsx
+│   ├── form/                    # Form components (5)
+│   │   ├── Checkbox.tsx, Radio.tsx, Toggle.tsx
+│   │   ├── Slider.tsx, FormGroup.tsx
+│   │   └── index.ts
+│   ├── feedback/                # Feedback components (5)
+│   │   ├── Toast.tsx, Tooltip.tsx, ProgressBar.tsx
+│   │   ├── Spinner.tsx, Skeleton.tsx
+│   │   └── index.ts
+│   ├── navigation/              # Navigation components (5)
+│   │   ├── Tabs.tsx, Breadcrumb.tsx, Pagination.tsx
+│   │   ├── Navbar.tsx, Sidebar.tsx
+│   │   └── index.ts
+│   ├── layout/                  # Layout components (5)
+│   │   ├── Modal.tsx, Drawer.tsx, Divider.tsx
+│   │   ├── Avatar.tsx, Stack.tsx
+│   │   └── index.ts
+│   ├── data/                    # Data components (3)
+│   │   ├── Table.tsx, List.tsx, Dropdown.tsx
+│   │   └── index.ts
+│   └── index.ts                 # Central exports for all components
+└── hooks/
+    └── useTheme.ts              # Dark/light/system mode management
 ```
 
 ## Usage
@@ -97,23 +122,132 @@ function MyComponent() {
 
 ### Using Components
 
+**Base Components:**
 ```tsx
-import { Button, Input, Card, CardHeader, CardTitle, CardContent, Badge, Alert } from './components'
+import { Button, Input, Card, Badge, Alert } from './components'
 
-export default function Example() {
+export function Example() {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Welcome</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Input label="Your name" placeholder="John" />
-        <Button>Submit</Button>
-        <Badge>New</Badge>
-      </CardContent>
+      <Input label="Name" />
+      <Button>Submit</Button>
+      <Badge>New</Badge>
     </Card>
   )
 }
+```
+
+**Form Components:**
+```tsx
+import { Checkbox, Radio, Toggle, Slider, FormGroup } from './components/form'
+
+export function FormExample() {
+  const [value, setValue] = useState(50)
+  
+  return (
+    <FormGroup label="Settings" required>
+      <Checkbox label="Accept terms" />
+      <Toggle label="Enable notifications" />
+      <Slider min={0} max={100} value={value} onChange={setValue} />
+    </FormGroup>
+  )
+}
+```
+
+**Feedback Components:**
+```tsx
+import { Toast, Tooltip, ProgressBar, Spinner } from './components/feedback'
+
+export function FeedbackExample() {
+  return (
+    <>
+      <Tooltip content="Helpful text"><Button>Hover</Button></Tooltip>
+      <ProgressBar value={75} max={100} />
+      <Spinner size="md" />
+    </>
+  )
+}
+```
+
+**Navigation Components:**
+```tsx
+import { Tabs, Navbar, Pagination } from './components/navigation'
+
+export function NavExample() {
+  const [page, setPage] = useState(1)
+  
+  return (
+    <>
+      <Navbar title="App" logo="🎨" />
+      <Tabs tabs={[
+        { id: '1', label: 'Tab 1', content: 'Content 1' },
+        { id: '2', label: 'Tab 2', content: 'Content 2' },
+      ]} />
+      <Pagination currentPage={page} totalPages={5} onPageChange={setPage} />
+    </>
+  )
+}
+```
+
+**Layout Components:**
+```tsx
+import { Modal, Avatar, HStack, Divider } from './components/layout'
+
+export function LayoutExample() {
+  const [open, setOpen] = useState(false)
+  
+  return (
+    <>
+      <HStack gap="md">
+        <Avatar initials="JD" />
+        <p>User Profile</p>
+      </HStack>
+      <Divider />
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
+        Modal content here...
+      </Modal>
+    </>
+  )
+}
+```
+
+**Data Components:**
+```tsx
+import { Table, List, Dropdown } from './components/data'
+
+export function DataExample() {
+  return (
+    <>
+      <Table
+        columns={[
+          { key: 'name', label: 'Name' },
+          { key: 'email', label: 'Email' },
+        ]}
+        data={data}
+      />
+      <List items={[
+        { id: 1, label: 'Item 1' },
+        { id: 2, label: 'Item 2' },
+      ]} />
+    </>
+  )
+}
+```
+
+### Importing Components
+
+**From main index (recommended):**
+```typescript
+import { Button, Checkbox, Modal, Table } from './components'
+```
+
+**From category folders:**
+```typescript
+import { Checkbox, Toggle, Slider } from './components/form'
+import { Toast, Tooltip, Spinner } from './components/feedback'
+import { Tabs, Navbar, Sidebar } from './components/navigation'
+import { Modal, Avatar, HStack } from './components/layout'
+import { Table, List, Dropdown } from './components/data'
 ```
 
 ### Primary Color in Styles
@@ -132,6 +266,65 @@ Or directly in CSS/Tailwind:
   background-color: var(--color-primary-500);
 }
 ```
+
+## Component Library Overview
+
+### Organization & Features
+
+**32 Components across 6 categories:**
+
+| Category | Count | Description |
+|----------|-------|-------------|
+| **Base** | 8 | Foundation UI elements (Button, Input, Card, Badge, Select, Textarea, Alert, ThemePanel) |
+| **Form** | 5 | Form controls with validation support (Checkbox, Radio, Toggle, Slider, FormGroup) |
+| **Feedback** | 5 | User feedback mechanisms (Toast, Tooltip, ProgressBar, Spinner, Skeleton) |
+| **Navigation** | 5 | Navigation patterns (Tabs, Breadcrumb, Pagination, Navbar, Sidebar) |
+| **Layout** | 5 | Structural components (Modal, Drawer, Divider, Avatar, Stack) |
+| **Data** | 3 | Data display (Table, List, Dropdown) |
+
+✅ **All components feature:**
+- Full TypeScript support with precise prop interfaces
+- Complete dark mode support out of the box
+- Responsive design ready for mobile/tablet/desktop
+- Accessible HTML with ARIA labels and semantic structure
+- Customizable props for flexibility
+- Tailwind CSS classes with primary color variants
+- Consistent styling and animations
+
+### Component Details
+
+**Form Components:**
+- **Checkbox** - Customizable checkbox with labels and error states
+- **Radio** - Single radio button with RadioGroup wrapper for managing multiple options
+- **Toggle** - Switch component with 3 sizes (sm/md/lg) and smooth animations
+- **Slider** - Range input with visual progress bar and gradient fill
+- **FormGroup** - Wrapper component for consistent form layouts with labels, hints, errors
+
+**Feedback Components:**
+- **Toast** - Dismissible notifications with 4 variants (success/error/info/warning) and auto-dismiss
+- **Tooltip** - Hover tooltips with 4 directional positions (top/bottom/left/right)
+- **ProgressBar** - Visual progress indicator with 4 variants, labels, and animations
+- **Spinner** - Loading indicator with 3 sizes and customizable colors
+- **Skeleton** - Animated placeholder for loading states with circular option
+
+**Navigation Components:**
+- **Tabs** - Tabbed interface with pills and underline variants
+- **Breadcrumb** - Navigation path display with icon support
+- **Pagination** - Smart page navigation with ellipsis and arrow controls
+- **Navbar** - Sticky header with logo, title, and responsive mobile menu
+- **Sidebar** - Full-height collapsible navigation with drawer overlay for mobile
+
+**Layout Components:**
+- **Modal** - Centered dialog with 3 sizes (sm/md/lg), header, body, footer, and close button
+- **Drawer** - Slide-out panel from left or right with overlay backdrop
+- **Divider** - Horizontal or vertical divider with optional text label
+- **Avatar** - User avatar displaying image or initials with online status indicator
+- **Stack** - Layout utilities (HStack, VStack) with gap, alignment, and justify options
+
+**Data Components:**
+- **Table** - Data table with striped/hover/bordered variants, custom cell rendering
+- **List** - Ordered/unordered lists with compact variant and active state
+- **Dropdown** - Positioned dropdown menu with divider support and disabled items
 
 ## Theme System Architecture
 
