@@ -1,5 +1,3 @@
-import React from 'react'
-
 export interface ProgressBarProps {
   value: number
   max?: number
