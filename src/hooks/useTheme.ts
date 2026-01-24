@@ -8,19 +8,29 @@ export function useTheme() {
   // Apply theme to <html>
   const applyTheme = (t: Theme) => {
     if (t === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
+      console.log('🌙 applyTheme: Applying light mode')
+      document.documentElement.classList.remove("dark");
     } else if (t === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
+      console.log('🌙 applyTheme: Applying dark mode')
+      document.documentElement.classList.add("dark");
     } else {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+      console.log('🌙 applyTheme: System mode - OS prefers:', isDark ? 'dark' : 'light')
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     }
   };
 
-  // Load saved theme on mount
+  // Load saved theme mode on mount
   useEffect(() => {
-    const saved = localStorage.getItem("theme") as Theme | null;
+    const saved = localStorage.getItem("themeMode") as Theme | null;
     const initial = saved || "system";
+    console.log('🌙 useTheme initialized:')
+    console.log('  - Saved in localStorage (themeMode):', saved)
+    console.log('  - Using mode:', initial)
     setTheme(initial);
     applyTheme(initial);
   }, []);
@@ -38,8 +48,11 @@ export function useTheme() {
 
   // Public setter
   const changeTheme = (t: Theme) => {
+    console.log('🌙 changeTheme called:')
+    console.log('  - New mode:', t)
     setTheme(t);
-    localStorage.setItem("theme", t);
+    localStorage.setItem("themeMode", t);
+    console.log('  - Saved to localStorage: themeMode =', t)
     applyTheme(t);
   };
 

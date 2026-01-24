@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useTheme } from './hooks/useTheme'
+import { useTheme } from '../hooks/useTheme'
 
 const THEMES = [
   'indigo',
@@ -32,18 +32,31 @@ export default function ThemePanel() {
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme') || 'indigo'
-    setCurrentTheme(saved)
-    document.documentElement.dataset.theme = saved
+    const savedColor = localStorage.getItem('themeColor') || 'indigo'
+    console.log('🎨 ThemePanel mounted')
+    console.log('  - Saved color theme:', savedColor)
+    console.log('  - Current theme state:', theme)
+    setCurrentTheme(savedColor)
+    document.documentElement.dataset.theme = savedColor
   }, [])
 
-  const handleThemeChange = (theme: string) => {
-    setCurrentTheme(theme)
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('theme', theme)
+  const handleThemeChange = (colorTheme: string) => {
+    console.log('🎨 Color theme changed:')
+    console.log('  - New color:', colorTheme)
+    console.log('  - Dark mode state:', theme)
+    setCurrentTheme(colorTheme)
+    document.documentElement.dataset.theme = colorTheme
+    localStorage.setItem('themeColor', colorTheme)
   }
 
-  const handleDarkToggle = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+  const handleDarkToggle = () => {
+    const newMode = theme === 'dark' ? 'light' : 'dark'
+    console.log('🌙 Dark mode toggle clicked:')
+    console.log('  - Current theme mode:', theme)
+    console.log('  - New theme mode:', newMode)
+    console.log('  - Color theme:', currentTheme)
+    setTheme(newMode)
+  }
 
   return (
     <>

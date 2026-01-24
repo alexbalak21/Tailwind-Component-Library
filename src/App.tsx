@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ThemePanel from './ThemePanel'
+import ThemePanel from './components/ThemePanel'
 import {
   Button,
   Input,
