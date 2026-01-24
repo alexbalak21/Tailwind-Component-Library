@@ -2,7 +2,6 @@ export interface SidebarProps {
   items: SidebarItem[]
   isOpen?: boolean
   onClose?: () => void
-  style?: 'default' | 'minimal'
 }
 
 export interface SidebarItem {
@@ -13,7 +12,7 @@ export interface SidebarItem {
   active?: boolean
 }
 
-export function Sidebar({ items, isOpen = true, onClose, style = 'default' }: SidebarProps) {
+export function Sidebar({ items, isOpen = true, onClose }: SidebarProps) {
   return (
     <>
       {isOpen && (

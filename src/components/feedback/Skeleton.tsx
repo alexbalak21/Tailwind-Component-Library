@@ -7,9 +7,6 @@ export interface SkeletonProps {
 }
 
 export function Skeleton({ width = '100%', height = '1rem', circle = false, className = '' }: SkeletonProps) {
-  const widthClass = typeof width === 'number' ? `w-${width}` : 'w-full'
-  const heightClass = typeof height === 'number' ? `h-${height}` : 'h-4'
-
   return (
     <div
       className={`bg-gray-200 dark:bg-gray-700 animate-pulse ${circle ? 'rounded-full' : 'rounded'} ${className}`}

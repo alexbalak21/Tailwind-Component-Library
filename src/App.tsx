@@ -8,18 +8,15 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-  CardFooter,
   Badge,
   Select,
   Textarea,
   Alert,
   // Form Components
   Checkbox,
-  Radio,
   RadioGroup,
   Toggle,
   Slider,
-  FormGroup,
   // Feedback Components
   Toast,
   Tooltip,
@@ -46,9 +43,6 @@ import {
 } from './components'
 
 function App() {
-  // Form state
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [selectedOption, setSelectedOption] = useState('')
   const [showAlert, setShowAlert] = useState(false)
 
   // Form components state
@@ -93,14 +87,6 @@ function App() {
     { label: 'Components', href: '#' },
     { label: 'Demo', href: '#' },
   ]
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setShowAlert(true)
-    setShowToast(true)
-    setFormData({ name: '', email: '', message: '' })
-    setTimeout(() => setShowAlert(false), 3000)
-  }
 
   return (
     <>
