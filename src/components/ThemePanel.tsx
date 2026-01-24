@@ -97,7 +97,7 @@ export default function ThemePanel() {
 
         {/* Dark / Light Toggle */}
         <div className="flex items-center justify-between mb-4 p-3 rounded-lg bg-gray-100 dark:bg-gray-800">
-          <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
+          <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{theme === 'dark' ? 'Dark mode 🌙' : 'Light mode ☀️'}</span>
           <button
             onClick={handleDarkToggle}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${

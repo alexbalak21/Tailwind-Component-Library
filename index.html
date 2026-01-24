@@ -1,10 +1,31 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/react.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tailwind</title>
+    <script>
+      // Apply theme immediately before React renders (prevents flash)
+      const themeMode = localStorage.getItem('themeMode');
+      const themeColor = localStorage.getItem('themeColor') || 'indigo';
+      
+      // Apply dark mode class if saved
+      if (themeMode === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else if (themeMode === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        // System mode
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      }
+      
+      // Apply color theme
+      document.documentElement.dataset.theme = themeColor;
+    </script>
   </head>
   <body>
     <div id="root"></div>
