@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-
 export interface SidebarProps {
   items: SidebarItem[]
   isOpen?: boolean
