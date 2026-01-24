@@ -1,6 +1,6 @@
 import React from 'react'
 
-export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
   label?: string
   size?: 'sm' | 'md' | 'lg'
 }
