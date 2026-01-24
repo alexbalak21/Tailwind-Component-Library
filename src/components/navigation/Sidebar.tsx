@@ -16,19 +16,19 @@ export interface SidebarItem {
 export function Sidebar({ items, isOpen = true, onClose, style = 'default' }: SidebarProps) {
   return (
     <>
-      {!isOpen && (
+      {isOpen && (
         <button
           onClick={onClose}
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 z-30 md:hidden"
         />
       )}
 
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transform transition-transform z-40 md:static md:transform-none ${
+        className={`fixed left-0    bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transform transition-transform z-40 md:static md:transform-none md:h-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="p-4 space-y-2">
+        <div className="p-4 space-y-2 h-full overflow-y-auto">
           {items.map((item) => (
             <button
               key={item.label}
