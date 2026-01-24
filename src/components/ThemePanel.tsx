@@ -136,9 +136,9 @@ export default function ThemePanel() {
         </div>
 
         {/* Current Theme Display */}
-        <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Current Theme: <span className="font-semibold text-gray-900 dark:text-white capitalize">{currentTheme}</span>
+        <div className="mt-4 p-3 bg-primary-500 rounded-lg">
+          <p className="text-sm text-white">
+            Current Theme: <span className="font-semibold capitalize">{currentTheme}</span>
           </p>
         </div>
       </div>
