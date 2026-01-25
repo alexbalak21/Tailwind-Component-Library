@@ -1,6 +1,8 @@
-# Tailwind Theme System & Component Library
+# <img src="./public/favicon.svg" width="32" alt="Logo" /> Tailwind CSS Component Library
 
 A modern React application built with Tailwind CSS v4, featuring a dynamic theme system with 22 color options and dark/light mode support, plus a complete UI component library.
+
+### 🚀 Deployed : [TailwindCss Library](https://alexbalak21.github.io/Tailwind/)
 
 ## Features
 
