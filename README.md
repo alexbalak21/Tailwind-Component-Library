@@ -2,11 +2,20 @@
 
 A modern React application built with Tailwind CSS v4, featuring a dynamic theme system with 22 color options and dark/light mode support, plus a complete UI component library.
 
-### 🚀 Deployed : [TailwindCss Library](https://alexbalak21.github.io/Tailwind/)
+<h3 style="font-size: 24px;" >🚀 Deployed : <a href="https://alexbalak21.github.io/Tailwind/">TailwindCss Component Library</a> </h3>
+<br>
+<h3 style="font-size: 24px;" >🖼️ Images</h3>
+
+<span> 
+<img src="screenshots/ThemePicker.jpg" alt="Theme Picker" width="150" style="margin-right: 10px;" /> 
+<img src="screenshots/base_light.jpg" alt="Base Components Light Theme" width="300" style="margin-right: 10px; margin-bottom: 60px" /> 
+<img src="screenshots/base_dark.jpg" alt="Base Components Dark Theme" width="300" style="margin-right: 10px; margin-bottom: 60px" />
+</span>
 
 ## Features
 
 ✨ **Theme System**
+
 - 22 color themes (red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, slate, gray, zinc, neutral, stone)
 - Dark/Light/System mode toggle with localStorage persistence
 - CSS variable-based theming for runtime color switching
@@ -15,24 +24,31 @@ A modern React application built with Tailwind CSS v4, featuring a dynamic theme
 📦 **Component Library (32 Total)**
 
 **Base Components (8)**
+
 - Button, Input, Card, Badge, Select, Textarea, Alert, ThemePanel
 
 **Form Components (5)**
+
 - Checkbox, Radio, Toggle, Slider, FormGroup
 
 **Feedback Components (5)**
+
 - Toast, Tooltip, ProgressBar, Spinner, Skeleton
 
 **Navigation Components (5)**
+
 - Tabs, Breadcrumb, Pagination, Navbar, Sidebar
 
 **Layout Components (5)**
+
 - Modal, Drawer, Divider, Avatar, Stack (HStack/VStack)
 
 **Data Components (3)**
+
 - Table, List, Dropdown
 
 🎨 **Interactive Demo**
+
 - Full-page showcase of all components with live examples
 - Responsive design with working state management
 - Complete dark mode support
@@ -40,6 +56,7 @@ A modern React application built with Tailwind CSS v4, featuring a dynamic theme
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Modern web browser
 
@@ -101,7 +118,9 @@ src/
 ### Theme System
 
 #### Using the Theme Panel
+
 Click the floating button in the bottom-right corner to open the theme panel:
+
 - Select a color from the 22-color grid to change the primary color
 - Toggle the switch to switch between light and dark modes
 - Choose from Light, Dark, or System (syncs with OS preference)
@@ -125,8 +144,9 @@ function MyComponent() {
 ### Using Components
 
 **Base Components:**
+
 ```tsx
-import { Button, Input, Card, Badge, Alert } from './components'
+import {Button, Input, Card, Badge, Alert} from "./components"
 
 export function Example() {
   return (
@@ -140,12 +160,13 @@ export function Example() {
 ```
 
 **Form Components:**
+
 ```tsx
-import { Checkbox, Radio, Toggle, Slider, FormGroup } from './components/form'
+import {Checkbox, Radio, Toggle, Slider, FormGroup} from "./components/form"
 
 export function FormExample() {
   const [value, setValue] = useState(50)
-  
+
   return (
     <FormGroup label="Settings" required>
       <Checkbox label="Accept terms" />
@@ -157,13 +178,16 @@ export function FormExample() {
 ```
 
 **Feedback Components:**
+
 ```tsx
-import { Toast, Tooltip, ProgressBar, Spinner } from './components/feedback'
+import {Toast, Tooltip, ProgressBar, Spinner} from "./components/feedback"
 
 export function FeedbackExample() {
   return (
     <>
-      <Tooltip content="Helpful text"><Button>Hover</Button></Tooltip>
+      <Tooltip content="Helpful text">
+        <Button>Hover</Button>
+      </Tooltip>
       <ProgressBar value={75} max={100} />
       <Spinner size="md" />
     </>
@@ -172,19 +196,22 @@ export function FeedbackExample() {
 ```
 
 **Navigation Components:**
+
 ```tsx
-import { Tabs, Navbar, Pagination } from './components/navigation'
+import {Tabs, Navbar, Pagination} from "./components/navigation"
 
 export function NavExample() {
   const [page, setPage] = useState(1)
-  
+
   return (
     <>
       <Navbar title="App" logo="🎨" />
-      <Tabs tabs={[
-        { id: '1', label: 'Tab 1', content: 'Content 1' },
-        { id: '2', label: 'Tab 2', content: 'Content 2' },
-      ]} />
+      <Tabs
+        tabs={[
+          {id: "1", label: "Tab 1", content: "Content 1"},
+          {id: "2", label: "Tab 2", content: "Content 2"},
+        ]}
+      />
       <Pagination currentPage={page} totalPages={5} onPageChange={setPage} />
     </>
   )
@@ -192,12 +219,13 @@ export function NavExample() {
 ```
 
 **Layout Components:**
+
 ```tsx
-import { Modal, Avatar, HStack, Divider } from './components/layout'
+import {Modal, Avatar, HStack, Divider} from "./components/layout"
 
 export function LayoutExample() {
   const [open, setOpen] = useState(false)
-  
+
   return (
     <>
       <HStack gap="md">
@@ -214,23 +242,26 @@ export function LayoutExample() {
 ```
 
 **Data Components:**
+
 ```tsx
-import { Table, List, Dropdown } from './components/data'
+import {Table, List, Dropdown} from "./components/data"
 
 export function DataExample() {
   return (
     <>
       <Table
         columns={[
-          { key: 'name', label: 'Name' },
-          { key: 'email', label: 'Email' },
+          {key: "name", label: "Name"},
+          {key: "email", label: "Email"},
         ]}
         data={data}
       />
-      <List items={[
-        { id: 1, label: 'Item 1' },
-        { id: 2, label: 'Item 2' },
-      ]} />
+      <List
+        items={[
+          {id: 1, label: "Item 1"},
+          {id: 2, label: "Item 2"},
+        ]}
+      />
     </>
   )
 }
@@ -239,17 +270,19 @@ export function DataExample() {
 ### Importing Components
 
 **From main index (recommended):**
+
 ```typescript
-import { Button, Checkbox, Modal, Table } from './components'
+import {Button, Checkbox, Modal, Table} from "./components"
 ```
 
 **From category folders:**
+
 ```typescript
-import { Checkbox, Toggle, Slider } from './components/form'
-import { Toast, Tooltip, Spinner } from './components/feedback'
-import { Tabs, Navbar, Sidebar } from './components/navigation'
-import { Modal, Avatar, HStack } from './components/layout'
-import { Table, List, Dropdown } from './components/data'
+import {Checkbox, Toggle, Slider} from "./components/form"
+import {Toast, Tooltip, Spinner} from "./components/feedback"
+import {Tabs, Navbar, Sidebar} from "./components/navigation"
+import {Modal, Avatar, HStack} from "./components/layout"
+import {Table, List, Dropdown} from "./components/data"
 ```
 
 ### Primary Color in Styles
@@ -257,12 +290,11 @@ import { Table, List, Dropdown } from './components/data'
 The primary color is available via CSS variables:
 
 ```tsx
-<div className="bg-primary-500 text-white">
-  Uses the selected primary color
-</div>
+<div className="bg-primary-500 text-white">Uses the selected primary color</div>
 ```
 
 Or directly in CSS/Tailwind:
+
 ```css
 .custom-element {
   background-color: var(--color-primary-500);
@@ -275,16 +307,17 @@ Or directly in CSS/Tailwind:
 
 **32 Components across 6 categories:**
 
-| Category | Count | Description |
-|----------|-------|-------------|
-| **Base** | 8 | Foundation UI elements (Button, Input, Card, Badge, Select, Textarea, Alert, ThemePanel) |
-| **Form** | 5 | Form controls with validation support (Checkbox, Radio, Toggle, Slider, FormGroup) |
-| **Feedback** | 5 | User feedback mechanisms (Toast, Tooltip, ProgressBar, Spinner, Skeleton) |
-| **Navigation** | 5 | Navigation patterns (Tabs, Breadcrumb, Pagination, Navbar, Sidebar) |
-| **Layout** | 5 | Structural components (Modal, Drawer, Divider, Avatar, Stack) |
-| **Data** | 3 | Data display (Table, List, Dropdown) |
+| Category       | Count | Description                                                                              |
+| -------------- | ----- | ---------------------------------------------------------------------------------------- |
+| **Base**       | 8     | Foundation UI elements (Button, Input, Card, Badge, Select, Textarea, Alert, ThemePanel) |
+| **Form**       | 5     | Form controls with validation support (Checkbox, Radio, Toggle, Slider, FormGroup)       |
+| **Feedback**   | 5     | User feedback mechanisms (Toast, Tooltip, ProgressBar, Spinner, Skeleton)                |
+| **Navigation** | 5     | Navigation patterns (Tabs, Breadcrumb, Pagination, Navbar, Sidebar)                      |
+| **Layout**     | 5     | Structural components (Modal, Drawer, Divider, Avatar, Stack)                            |
+| **Data**       | 3     | Data display (Table, List, Dropdown)                                                     |
 
 ✅ **All components feature:**
+
 - Full TypeScript support with precise prop interfaces
 - Complete dark mode support out of the box
 - Responsive design ready for mobile/tablet/desktop
@@ -296,6 +329,7 @@ Or directly in CSS/Tailwind:
 ### Component Details
 
 **Form Components:**
+
 - **Checkbox** - Customizable checkbox with labels and error states
 - **Radio** - Single radio button with RadioGroup wrapper for managing multiple options
 - **Toggle** - Switch component with 3 sizes (sm/md/lg) and smooth animations
@@ -303,6 +337,7 @@ Or directly in CSS/Tailwind:
 - **FormGroup** - Wrapper component for consistent form layouts with labels, hints, errors
 
 **Feedback Components:**
+
 - **Toast** - Dismissible notifications with 4 variants (success/error/info/warning) and auto-dismiss
 - **Tooltip** - Hover tooltips with 4 directional positions (top/bottom/left/right)
 - **ProgressBar** - Visual progress indicator with 4 variants, labels, and animations
@@ -310,6 +345,7 @@ Or directly in CSS/Tailwind:
 - **Skeleton** - Animated placeholder for loading states with circular option
 
 **Navigation Components:**
+
 - **Tabs** - Tabbed interface with pills and underline variants
 - **Breadcrumb** - Navigation path display with icon support
 - **Pagination** - Smart page navigation with ellipsis and arrow controls
@@ -317,6 +353,7 @@ Or directly in CSS/Tailwind:
 - **Sidebar** - Full-height collapsible navigation with drawer overlay for mobile
 
 **Layout Components:**
+
 - **Modal** - Centered dialog with 3 sizes (sm/md/lg), header, body, footer, and close button
 - **Drawer** - Slide-out panel from left or right with overlay backdrop
 - **Divider** - Horizontal or vertical divider with optional text label
@@ -324,6 +361,7 @@ Or directly in CSS/Tailwind:
 - **Stack** - Layout utilities (HStack, VStack) with gap, alignment, and justify options
 
 **Data Components:**
+
 - **Table** - Data table with striped/hover/bordered variants, custom cell rendering
 - **List** - Ordered/unordered lists with compact variant and active state
 - **Dropdown** - Positioned dropdown menu with divider support and disabled items
@@ -331,9 +369,11 @@ Or directly in CSS/Tailwind:
 ## Theme System Architecture
 
 ### How It Works
+
 The theme system operates on two independent tracks:
 
 **1. Dark/Light Mode (`themeMode` in localStorage)**
+
 - Managed by `useTheme()` hook
 - Applies `dark` class to root HTML element
 - Supports three modes: `light`, `dark`, `system`
@@ -341,6 +381,7 @@ The theme system operates on two independent tracks:
 - Persisted in localStorage with key: `themeMode`
 
 **2. Color Theme (`themeColor` in localStorage)**
+
 - Managed by ThemePanel component
 - Applies `data-theme="colorname"` attribute to root HTML element
 - 22 color presets available
@@ -348,28 +389,34 @@ The theme system operates on two independent tracks:
 - Persisted in localStorage with key: `themeColor`
 
 ### Preventing Flash on Reload
+
 An inline script in `index.html` runs **before React renders**, applying saved theme settings synchronously:
+
 ```html
 <script>
-  const themeMode = localStorage.getItem('themeMode');
-  const themeColor = localStorage.getItem('themeColor') || 'indigo';
-  
-  if (themeMode === 'dark') {
-    document.documentElement.classList.add('dark');
+  const themeMode = localStorage.getItem("themeMode")
+  const themeColor = localStorage.getItem("themeColor") || "indigo"
+
+  if (themeMode === "dark") {
+    document.documentElement.classList.add("dark")
   }
-  document.documentElement.dataset.theme = themeColor;
+  document.documentElement.dataset.theme = themeColor
 </script>
 ```
+
 This ensures the correct theme is visible immediately, with no light→dark flash.
 
 ### CSS Implementation
+
 The `index.css` file defines:
+
 - `@theme` block with 22 color palettes mapping to CSS variables
 - Custom dark variant: `@custom-variant dark (&:where(.dark, .dark *))`
 - Each color theme mapped via `[data-theme="colorname"]` selectors
 - All components use `dark:` variants which activate when `.dark` class is present
 
 ### Storage Keys
+
 - `themeMode` - Stores: `"light"`, `"dark"`, or `"system"`
 - `themeColor` - Stores: Color name like `"indigo"`, `"red"`, `"cyan"`, etc.
 
@@ -407,12 +454,12 @@ import type { Theme } from './hooks/useTheme'
 export function MyComponent() {
   const { theme, setTheme } = useTheme()
   // theme is "light" | "dark" | "system"
-  
+
   const handleToggle = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
     // Automatically saves to localStorage and applies dark class
   }
-  
+
   return (
     <div>
       <p>Current mode: {theme}</p>
@@ -427,6 +474,7 @@ export function MyComponent() {
 To add or modify color themes, edit `src/index.css`:
 
 1. Add color variables in the `@theme` block (if adding new colors):
+
 ```css
 @theme {
   --color-mycustom-50: #f0f0f0;
@@ -437,6 +485,7 @@ To add or modify color themes, edit `src/index.css`:
 ```
 
 2. Add a color preset selector:
+
 ```css
 [data-theme="mycustom"] {
   --color-primary-50: var(--color-mycustom-50);
@@ -447,10 +496,11 @@ To add or modify color themes, edit `src/index.css`:
 ```
 
 3. Add to THEMES array in `ThemePanel.tsx`:
+
 ```typescript
 const THEMES = [
   // ... existing colors ...
-  'mycustom',
+  "mycustom",
 ]
 ```
 
@@ -463,6 +513,7 @@ MIT - Feel free to use this project for personal or commercial use.
 The theme system includes detailed console logging to help track state changes. Open your browser's developer console (F12) to see:
 
 **When initializing:**
+
 ```
 🌙 useTheme initialized:
   - Saved in localStorage (themeMode): dark
@@ -471,6 +522,7 @@ The theme system includes detailed console logging to help track state changes. 
 ```
 
 **When toggling dark mode:**
+
 ```
 🌙 Dark mode toggle clicked:
   - Current theme mode: dark
@@ -482,6 +534,7 @@ The theme system includes detailed console logging to help track state changes. 
 ```
 
 **When changing color:**
+
 ```
 🎨 Color theme changed:
   - New color: red
@@ -493,4 +546,7 @@ Remove these console.log calls if they're not needed in production.
 ## Contributing
 
 Pull requests welcome! For major changes, please open an issue first to discuss what you'd like to change.
+
+```
+
 ```
