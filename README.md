@@ -4,13 +4,13 @@ A modern React application built with Tailwind CSS v4, featuring a dynamic theme
 
 <h3 style="font-size: 24px;" >🚀 Deployed : <a href="https://alexbalak21.github.io/Tailwind/">TailwindCss Component Library</a> </h3>
 <br>
-<h3 style="font-size: 24px;" >🖼️ Images</h3>
+<h3 style="font-size: 24px;" >🖼️ Exemple Images</h3>
 
-<span> 
+<p> 
 <img src="screenshots/ThemePicker.jpg" alt="Theme Picker" width="150" style="margin-right: 10px;" /> 
 <img src="screenshots/base_light.jpg" alt="Base Components Light Theme" width="300" style="margin-right: 10px; margin-bottom: 60px" /> 
 <img src="screenshots/base_dark.jpg" alt="Base Components Dark Theme" width="300" style="margin-right: 10px; margin-bottom: 60px" />
-</span>
+</p>
 
 ## Features
 
