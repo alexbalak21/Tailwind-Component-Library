@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Tailwind-Component-Library/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Components</title>
+    <script>
+      // Apply theme immediately before React renders (prevents flash)
+      const themeMode = localStorage.getItem("themeMode")
+      const themeColor = localStorage.getItem("themeColor") || "indigo"
+
+      // Apply dark mode class if saved
+      if (themeMode === "dark") {
+        document.documentElement.classList.add("dark")
+      } else if (themeMode === "light") {
+        document.documentElement.classList.remove("dark")
+      } else {
+        // System mode
+        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        if (isDark) {
+          document.documentElement.classList.add("dark")
+        }
+      }
+
+      // Apply color theme
+      document.documentElement.dataset.theme = themeColor
+    </script>
+    <script type="module" crossorigin src="/Tailwind-Component-Library/assets/index-D5c5n9vE.js"></script>
+    <link rel="stylesheet" crossorigin href="/Tailwind-Component-Library/assets/index-CFUIb-x8.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
