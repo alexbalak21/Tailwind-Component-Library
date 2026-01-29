@@ -12,6 +12,10 @@ A modern React application built with Tailwind CSS v4, featuring a dynamic theme
 <img src="screenshots/base_dark.jpg" alt="Base Components Dark Theme" width="300" style="margin-right: 10px; margin-bottom: 60px" />
 </p>
 
+### Enable Dark Mode
+
+To enable
+
 ## Features
 
 ✨ **Theme System**
