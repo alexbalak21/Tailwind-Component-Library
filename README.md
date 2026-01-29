@@ -14,7 +14,11 @@ A modern React application built with Tailwind CSS v4, featuring a dynamic theme
 
 ### Enable Dark Mode
 
-To enable dark / light mode switch you havve to get the hook : useTheme.tsx & add this line to your css : @custom-variant dark (&:where(.dark, .dark *));
+To enable dark / light mode switch you havve to get the hook : <a href="src/hooks/useTheme.ts">useTheme.ts </a> & add this line to your css : 
+```css
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
 After taht the hook will be able to change mods on the fly.
 
 ## Features
